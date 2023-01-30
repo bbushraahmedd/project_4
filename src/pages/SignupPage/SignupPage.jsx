@@ -37,7 +37,6 @@ function SignUpPage({handleSignUpOrLogin}) {
     async function handleSubmit(e){
         e.preventDefault();
         try {
-            
                 await userService.signup(state);
                 handleSignUpOrLogin(); // from app, grts user and sets in app state
                 navigate('/')
@@ -46,22 +45,6 @@ function SignUpPage({handleSignUpOrLogin}) {
                 console.log(err.message, 'error message in SIGNUP')
                 setError('CHECK TERMINAL, THERES AN ERROR IN SIGNUP DUMMY')
             }
-        // const formData = new FormData();
-        // for (let key in state){
-        //     formData.append(key, state[key])
-        // }
-        // console.log(formData.forEach((item => console.log(item))));
-
-        // try {
-            
-        //     await userService.signup(formData);
-        //     handleSignUpOrLogin(); // from app, grts user and sets in app state
-        //     navigate('/')
-
-        // } catch (err) {
-        //     console.log(err.message, 'error message in SIGNUP')
-        //     setError('CHECK TERMINAL, THERES AN ERROR IN SIGNUP DUMMY')
-        // }
     }
 
     function handleChange(e){
@@ -154,7 +137,7 @@ function SignUpPage({handleSignUpOrLogin}) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
