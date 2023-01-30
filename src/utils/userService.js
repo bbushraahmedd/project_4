@@ -3,7 +3,7 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 function signup(user) {
-  return fetch(BASE_URL + 'signup', {
+  return fetch(BASE_URL + 'signup/', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
     // what do datatype do you need to change this too?
@@ -12,7 +12,13 @@ function signup(user) {
   .then(res => {
     if (res.ok) return res.json();
     // Probably a duplicate email
-    throw new Error('Email already taken!');
+
+    // return for error
+    return res.json().then(response => {
+      console.log(response.error) //error message
+      throw new Error(response.error);
+    })
+    
   })
   // Parameter destructuring!
   .then(({token}) => tokenService.setToken(token));

@@ -11,6 +11,8 @@ export default {
 
 
 async function signup(req, res) {
+console.log(req.body, '<<<<<<< form content bro look at it')
+
   const user = new User(req.body);
   try {
     await user.save();
