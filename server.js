@@ -17,6 +17,8 @@ import './config/database.js'
 // Require controllers here
 const app = express();
 
+app.set('view engine', 'ejs');
+
 // console.log(assetsRouter)
 // add in when the app is ready to be deployed
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
@@ -31,11 +33,21 @@ import auth from './config/auth.js'
 app.use(auth); 
 // api routes must be before the "catch all" route
 import userRoutes from './routes/api/users.js';
+import taskRoutes from './routes/api/tasks.js';
 
+app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
 // "catch all" route
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.use(express.static(path.join(__dirname, "dist")));
+
+import manifest from './dist/manifest.json' assert {type: "json"};
+
+app.get('/*', function(req, res) {
+  res.render(path.join(__dirname, 'dist', 'index.ejs'), {manifest});
 });
 
 const { PORT = 8000 } = process.env;

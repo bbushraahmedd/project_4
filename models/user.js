@@ -7,10 +7,9 @@ const userSchema = new mongoose.Schema({
   firstName: {type: String, required: true, lowercase: true},
   lastName: {type: String, required: true, lowercase: true},
   email: {type: String, required: true, lowercase: true, unique: true},
-  password: String
-}, {
-  timestamps: true
-});
+  password: String}, 
+  {timestamps: true}
+  );
 
 userSchema.set('toJSON', {
   transform: function(doc, ret) {

@@ -2,6 +2,7 @@ import User from '../models/user.js'
 import jwt from 'jsonwebtoken'
 const SECRET = process.env.SECRET;
 
+import {s3} from '../config/s3-config.js'
 
 
 export default {
@@ -11,7 +12,6 @@ export default {
 
 
 async function signup(req, res) {
-console.log(req.body, '<<<<<<< form content bro look at it')
 
   const user = new User(req.body);
   try {
